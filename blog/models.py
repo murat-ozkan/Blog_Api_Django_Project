@@ -14,12 +14,13 @@ class Category(models.Model):
         return self.name
     
 class Post(models.Model):
-    title = models.CharField(max_length=128)
+    title = models.CharField(verbose_name="Create Date(Optional)", max_length=128)
     content = models.TextField()
-    created_date = models.DateTimeField(verbose_name="Create Date(Optional)",auto_now_add=True)
+    created_date = models.DateTimeField(verbose_name="Create Date(Optional)", auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Category, on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, verbose_name="Category", on_delete = models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.category + "/" + self.title
+        # return self.category + "/" + self.title # Bu olmuyor. Bir obje ile string birleştirilemez. Aşağıdaki gibi fstr kullan.
+        return f'{self.category} / {self.title}'
