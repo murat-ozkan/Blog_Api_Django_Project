@@ -6,8 +6,10 @@ from rest_framework.authtoken.views import obtain_auth_token
 router = DefaultRouter()
 router.register("", UserView)
 
-urlpatterns = router.urls
+# urlpatterns = router.urls
 # veya
-# urlpatterns = [
-#     path('', include(router.urls)),
-# ]
+urlpatterns = [
+    path('', include(router.urls)),
+    path('login', obtain_auth_token),
+    # path('logout', logout),
+]
